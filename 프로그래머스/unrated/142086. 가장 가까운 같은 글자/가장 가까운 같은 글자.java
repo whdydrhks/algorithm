@@ -1,21 +1,13 @@
 import java.util.*;
+
 class Solution {
     public int[] solution(String s) {
         int[] answer = new int[s.length()];
-        answer[0]=-1;
-        for(int i=1; i<s.length(); i++){
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(int i=0; i<s.length();i++){
             char ch = s.charAt(i);
-            int idx=0;
-            boolean flag=false;
-            for(int j=i-1; j>=0; j--){
-                idx++;
-                if(ch==s.charAt(j)) {
-                    flag=true;
-                    break;
-                }
-            }
-            if(flag) answer[i]=idx;
-            else answer[i]=-1;
+            answer[i] = i-map.getOrDefault(ch,i+1);
+            map.put(ch,i);
         }
         return answer;
     }
