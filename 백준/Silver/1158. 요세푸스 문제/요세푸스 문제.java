@@ -1,42 +1,28 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
-class Main {
-	static int N;
-	static int K;
-	static StringBuilder sb;
-	static Queue<Integer> q;
-	
-	public static void main(String[] args) throws IOException {
+public class Main {
+
+	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		N=Integer.parseInt(st.nextToken());
-		K=Integer.parseInt(st.nextToken());
-		
-		q = new LinkedList<>();
-		
-		for(int i=1; i<=N; i++) {
-			q.offer(i);
-		}
-		sb=new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		sb.append("<");
-		
-		// 마지막에 ,를 뺴고 숫자와 >를 넣기 위해서.
-		while(q.size() !=1) {
-			for(int i=0; i<K-1; i++) {
-				q.offer(q.poll()); // K전까지의 앞 숫자들을 다시 뒤로 넣는다.
-			}						// K갯수 이전까지를 넘어가니 뒤로 넘기는 것이다.
-			sb.append(q.poll() +", "); // 앞으로 나온 K번째를 넣기.
-			
+		int N = Integer.parseInt(st.nextToken());
+		int K = Integer.parseInt(st.nextToken());
+		LinkedList<Integer> list = new LinkedList<>(); 
+		for(int i=1; i<=N; i++) {
+			list.add(i);
 		}
 		
-		sb.append(q.poll()+">");
+		while(list.size() !=1) { 
+			for(int i=0; i<K-1; i++) { // K-1까지 돌고, K를 넣는다.
+				list.add(list.poll()); // 리스트를 다 돌면 다시 처음부터 돈다. => 리스트의 사이즈가 아닌, K의 횟수
+			}
+			sb.append(list.poll()).append(",").append(" ");
+		}
+		sb.append(list.get(0)).append(">");
 		
 		System.out.println(sb.toString());
 	}
-	
 }
