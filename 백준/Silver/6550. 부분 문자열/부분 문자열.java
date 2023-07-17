@@ -3,34 +3,28 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = null;
         StringBuilder sb = new StringBuilder();
-        StringTokenizer st;
 
-        while (true) {
+        while(true) {
             String str = br.readLine();
-            if(str == null) break;
+            if(str==null) break;
 
             st = new StringTokenizer(str);
 
-            String s = st.nextToken();
-            String t = st.nextToken();
+            String pattern = st.nextToken();
+            String target = st.nextToken();
+            int idx=0;
 
-            int idx = 0;
+            for(int i=0; i<target.length(); i++){
+                if(target.charAt(i)== pattern.charAt(idx)) idx++;
 
-            for (int i = 0; i < t.length(); i++) {
-                if (s.charAt(idx) == t.charAt(i)) {
-                    idx++;
-                }
-                if (idx == s.length()) {
+                if(idx==pattern.length()) {
                     break;
                 }
             }
 
-            if (idx == s.length()) {
-                sb.append("Yes").append('\n');
-            } else {
-                sb.append("No").append('\n');
-            }
+            sb.append(idx==pattern.length() ? "Yes" : "No").append("\n");
 
         }
         System.out.println(sb.toString());
