@@ -9,7 +9,7 @@ class Solution {
         for(int i=0; i<cities.length; i++){
             String city = cities[i].toUpperCase();
             
-            if(list.remove(city)) {
+            if(list.contains(city)) {
                 list.remove(city);
                 list.add(city);
                 answer+=1;
@@ -25,9 +25,6 @@ class Solution {
                 answer+=5;
             }
         }
-        
         return answer;
     }
-    
-    
 }
