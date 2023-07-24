@@ -13,12 +13,6 @@ class Solution {
         int len=1;
         ArrayList<Integer> list = new ArrayList<>();
         
-        if(progresses.length==1) {
-            answer=new int[1];
-            answer[0]=1;
-            return answer;
-        }
-        
         for(int i=1; i<arr.length; i++){
             if(num>=arr[i]) {
                 count++;
