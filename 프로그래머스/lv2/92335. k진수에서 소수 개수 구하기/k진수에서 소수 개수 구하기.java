@@ -24,7 +24,7 @@ class Solution {
         
         String[] arr = transform.split("0");
         for(int i=0; i<arr.length; i++){
-            if(arr[i].equals(" ") || arr[i].equals("")) continue;
+            if(arr[i].equals("")) continue;
             if(isPrime(arr[i])) sum++;
         }
         
@@ -35,7 +35,6 @@ class Solution {
         int count=0;
         long num = Long.parseLong(str);
         if(num==1) return false;
-        else if(num==2) return true;
         
         for(int i=2; i<=Math.sqrt(num); i++){
             if(num%i==0) return false;
