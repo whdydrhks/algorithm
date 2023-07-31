@@ -4,18 +4,15 @@ class Solution {
         int answer = -1;
         String transform = converter(n, k);
         answer = prime(transform);
-        
         return answer;
     }
     
     public static String converter(int n, int k) {
         String tmp = "";
-
         while(n!=0) {
             tmp = n%k + tmp;
             n/=k;
         }       
-    
         return tmp;        
     }
     
