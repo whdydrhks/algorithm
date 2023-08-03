@@ -10,9 +10,9 @@ class Solution {
                 order++;
                 if(order==m+1) order=1;
                 if(order==p) { // 내 차례
-                    answer = answer + number.toUpperCase();
-                    // answer+=number;
-                    if(answer.length() == t) return answer;
+                    // answer = answer + number.toUpperCase();
+                    answer+=number;
+                    if(answer.length() == t) return answer.toUpperCase();
                 }
                 else {
                     continue;
@@ -23,9 +23,9 @@ class Solution {
                     order++;
                     if(order==m+1) order=1;
                     if(order==p) {
-                        answer = answer+String.valueOf(number.charAt(j)).toUpperCase();
-                        // answer+=number.charAt(j);   
-                        if(answer.length() == t) return answer;
+                        // answer = answer+String.valueOf(number.charAt(j)).toUpperCase();
+                        answer+=number.charAt(j);   
+                        if(answer.length() == t) return answer.toUpperCase();
                     }
                     else {  
                         continue;
