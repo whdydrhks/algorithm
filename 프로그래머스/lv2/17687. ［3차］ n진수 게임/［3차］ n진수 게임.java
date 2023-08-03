@@ -7,10 +7,9 @@ class Solution {
     
             if(number.length()==1) { // 한문자
                 order++;
-                if(order==m+1) order=1;
+                if(order==m+1) order=1; // 순서 1부터
                 if(order==p) { // 내 차례
                     answer = answer + number.toUpperCase();
-                    // answer+=number;
                     if(answer.length() == t) return answer;
                 }
                 else {
@@ -22,8 +21,7 @@ class Solution {
                     order++;
                     if(order==m+1) order=1;
                     if(order==p) {
-                        answer = answer+String.valueOf(number.charAt(j)).toUpperCase();
-                        // answer+=number.charAt(j);   
+                        answer = answer+String.valueOf(number.charAt(j)).toUpperCase(); 
                         if(answer.length() == t) return answer;
                     }
                     else {  
