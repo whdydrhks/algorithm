@@ -27,7 +27,7 @@ public class Main {
 		visited[1]=true;
 		
 		while(!queue.isEmpty()) {
-			int now = queue.poll();
+			int now = queue.poll(); // 1부터 꺼내니까 하나씩 자식 트리로 간다
 			
 			for(int n : tree[now]) {
 				if(!visited[n]) {
