@@ -1,19 +1,19 @@
 import java.util.*;
 class Solution {
     static int len;
-    static ArrayList<Integer> list;
+    static HashSet<Integer> hset;
     public int solution(String numbers) {
         int answer = 0;
         len = numbers.length();
-        list = new ArrayList<>();
+        hset = new HashSet<>();
         for(int i=1; i<=len; i++){
             boolean[] visited = new boolean[len];
             char[] chrs = new char[i];
             perm(0, numbers, visited, chrs, i);
         }
         
-        for(int i=0; i<list.size(); i++){
-            if(isPrime(list.get(i))) answer++;
+        for(int num : hset) {
+            if(isPrime(num)) answer++;
         }
     
         return answer;
@@ -28,8 +28,7 @@ class Solution {
             int num = Integer.parseInt(tmp);
             if(num==0 || num==1) return;
             
-            if(list.contains(num)) return;
-            else list.add(num);
+            hset.add(num);
             
             return;
         }
