@@ -26,7 +26,6 @@ class Solution {
                 tmp+=chrs[i];
             }
             int num = Integer.parseInt(tmp);
-            if(num==0 || num==1) return;
             
             hset.add(num);
             
@@ -44,7 +43,7 @@ class Solution {
     
 
     public static boolean isPrime(int num) {
-        if(num==2) return true;
+        if(num==0 || num==1) return false;
         for(int i=2; i<=Math.sqrt(num); i++){
             if(num%i==0) return false;
         }
