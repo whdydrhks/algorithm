@@ -1,53 +1,35 @@
-import java.util.*;
+import java.util.HashSet;
 class Solution {
-    static int len;
-    static HashSet<Integer> hset;
     public int solution(String numbers) {
-        int answer = 0;
-        len = numbers.length();
-        hset = new HashSet<>();
-        for(int i=1; i<=len; i++){
-            boolean[] visited = new boolean[len];
-            char[] chrs = new char[i];
-            perm(0, numbers, visited, chrs, i);
-        }
-        
-        for(int num : hset) {
-            if(isPrime(num)) answer++;
-        }
-    
-        return answer;
-    }
-    
-    public static void perm(int depth, String numbers, boolean[] visited, char[] chrs, int limit) {
-        if(depth==limit) {
-            String tmp="";
-            for(int i=0; i<chrs.length; i++){
-                tmp+=chrs[i];
+        HashSet<Integer> set = new HashSet<>();
+        permutation("", numbers, set);
+        int count = 0;
+        while(set.iterator().hasNext()){
+            int a = set.iterator().next();
+            set.remove(a);
+            if(a==2) count++;
+            if(a%2!=0 && isPrime(a)){
+                count++;
             }
-            int num = Integer.parseInt(tmp);
-            if(num==0 || num==1) return;
-            
-            hset.add(num);
-            
-            return;
-        }
-        
-        for(int i=0; i<len; i++){
-            if(visited[i]) continue;
-            visited[i]=true;
-            chrs[depth]=numbers.charAt(i);
-            perm(depth+1, numbers, visited, chrs, limit);
-            visited[i]=false;
-        }
+        }        
+        return count;
     }
-    
 
-    public static boolean isPrime(int num) {
-        if(num==2) return true;
-        for(int i=2; i<num; i++){
-            if(num%i==0) return false;
+    public boolean isPrime(int n){
+        if(n==0 || n==1) return false;
+        for(int i=3; i<=(int)Math.sqrt(n); i+=2){
+            if(n%i==0) return false;
         }
         return true;
     }
+
+        public void permutation(String prefix, String str, HashSet<Integer> set) {
+        int n = str.length();
+        //if (n == 0) System.out.println(prefix);
+        if(!prefix.equals("")) set.add(Integer.valueOf(prefix));
+        for (int i = 0; i < n; i++)
+          permutation(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1, n), set);
+
+    }
+
 }
