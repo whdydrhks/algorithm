@@ -23,6 +23,7 @@ class Solution {
                 int val = hmap.get(key);
                 if(val==sum && val>=2) list.add(key);
             }
+            
             // System.out.println(hmap.toString());
         }
         Collections.sort(list);
@@ -47,6 +48,9 @@ class Solution {
         }
     }
 }
+
+// 1. 코스요리는 최소 2가지 이상의 메뉴
+// 2. 최소 2명 이상의 손님으로부터 주문받은 메뉴
 
 // 해결방법
 // course에 담긴 길이를 기준으로,
