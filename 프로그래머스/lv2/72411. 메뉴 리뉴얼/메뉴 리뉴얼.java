@@ -18,11 +18,11 @@ class Solution {
             for(String key : hmap.keySet()) {
                 sum = Math.max(sum, hmap.get(key));
             }
+            
             for(String key : hmap.keySet()) {
                 int val = hmap.get(key);
                 if(val==sum && val>=2) list.add(key);
             }
-            
             // System.out.println(hmap.toString());
         }
         Collections.sort(list);
@@ -34,7 +34,6 @@ class Solution {
     public static void comb(int depth, int start, int limit, String[] strarr, String[] arr, int N, HashMap<String, Integer> hmap) {
         if(depth==limit) {
             String tmp="";
-            
             // System.out.println(Arrays.toString(arr));
             for(String s : arr) tmp+=s;
             hmap.put(tmp, hmap.getOrDefault(tmp, 0)+1);
@@ -49,10 +48,7 @@ class Solution {
     }
 }
 
-// 1. 코스요리는 최소 2가지 이상의 메뉴
-// 2. 최소 2명 이상의 손님으로부터 주문받은 메뉴
-
 // 해결방법
 // course에 담긴 길이를 기준으로,
-// orders의 각 문자열을 길이에 대한 조합을 만들고 리스트에 담기 [조합, 횟수] - 없으면:1, 있으면+1
+// orders의 각 문자열을 길이에 대한 조합을 만들고 해시맵에 담기 [조합, 횟수] - 없으면:1, 있으면+1
 // 가장 많은 횟수의 조합을 Answer에 담는다.
