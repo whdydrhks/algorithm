@@ -1,39 +1,40 @@
 import java.util.*;
+
 class Solution {
-    public int[] solution(String[] operations) {
-        int[] answer = new int[2]; // [최대,최소]
-        // PriorityQueue<Integer> pq = new PriorityQueue<>();
-        Deque<Integer> dq = new ArrayDeque<>();
-        ArrayList<Integer> list = new ArrayList<>();
-        
-        for(String operation : operations) {
-            String[] commands = operation.split(" ");
-            
-            if(commands[0].equals("I")) {
-                dq.offer(Integer.parseInt(commands[1]));
-                list = new ArrayList<>(dq);
-                Collections.sort(list);
-                dq = new ArrayDeque<>(list);
-                // Collections.sort(dq);
-            }
-            else if(commands[0].equals("D") && dq.isEmpty()) continue;
-            
-            else if(commands[0].equals("D") && commands[1].startsWith("-1")) {
-                dq.pollFirst();
-            }
-            else {
-                dq.pollLast();
+    public int[] solution(String[] arguments) {
+        int[] answer = {0,0};
+
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        PriorityQueue<Integer> reverse_pq = new PriorityQueue<Integer>(Collections.reverseOrder());
+
+        for(int i=0; i<arguments.length; i++) {
+            String temp[] = arguments[i].split(" ");
+            switch(temp[0]) {
+            case "I" : 
+                pq.add(Integer.parseInt(temp[1]));
+                reverse_pq.add(Integer.parseInt(temp[1]));
+                break;
+            case "D" :
+                if(pq.size() > 0) {
+                    if(Integer.parseInt(temp[1]) == 1) {
+                        // 최댓값 삭제
+                        int max = reverse_pq.poll();
+                        pq.remove(max);
+                    } else {
+                        // 최솟값 삭제
+                        int min = pq.poll();
+                        reverse_pq.remove(min);
+                    }
+                }
+                break;
             }
         }
-        
-        if(dq.isEmpty()) {
-            answer[0]=0;
-            answer[1]=0;
+
+        if(pq.size() >= 2) {
+            answer[0] = reverse_pq.poll();
+            answer[1] = pq.poll();
         }
-        else {
-            answer[1] = dq.pollFirst();
-            answer[0] = dq.pollLast();
-        }
+
         return answer;
     }
 }
