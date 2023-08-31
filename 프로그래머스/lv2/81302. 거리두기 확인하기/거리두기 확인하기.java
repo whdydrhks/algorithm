@@ -20,9 +20,7 @@ class Solution {
         for(int i=0; i<places.length; i++){
             list = new ArrayList<>();
             String[] place = places[i];
-            // System.out.println("Idx: "+i);
             kakao(place, list, i, answer);
-            // System.out.println();
         }   
         
         return answer;
@@ -33,52 +31,37 @@ class Solution {
         for(int i=0; i<place.length; i++){
             for(int j=0; j<5; j++){
                 map[i][j] = place[i].charAt(j);
-                if(map[i][j]=='P') {
-                    list.add(new Pos(i,j));  
-                } 
+                if(map[i][j]=='P') list.add(new Pos(i,j));  
             }
         }
         
         int ans=1;
-        boolean flag=false;
         for(int i=0; i<list.size(); i++){
             for(int j=0; j<list.size(); j++){
                 if(i==j) continue; // 자기자신
                 
                 if(distance(list.get(i).x, list.get(i).y, list.get(j).x, list.get(j).y)) { // 맨하튼 거리2 이하   
-                    // System.out.println("맨하튼 거리2 이하!");
                     // X 체크.                    
                     if(check(list.get(i).x, list.get(i).y, list.get(j).x, list.get(j).y, map)) { // 파티션이 없다.
-                        // ans=0;
-                        // answer[idx]=0;
-                        // return;    
-                        flag=true;
+                        ans=0;
+                        answer[idx]=0;
+                        return;    
                     }
                 } 
-                // else break;
             }
         } 
-        if(flag) answer[idx]=0;
-        else answer[idx]=1;
+        answer[idx]=ans;
     }
     
     public static boolean check(int sx, int sy, int ex, int ey, char[][] map) {
-        int startx, starty, endx, endy;
+        int startx=sx, starty=sy, endx=ex, endy=ey;
         if(sx>ex) {
-            startx=ex;
-            endx=sx;
-        }
-        else {
-            startx=sx;
-            endx=ex;
+            startx = ex;
+            endx = sx;
         }
         if(sy>ey) {
             starty=ey;
             endy=sy;
-        }
-        else {
-            starty=sy;
-            endy=ey;
         }
         
         boolean flag = false;
