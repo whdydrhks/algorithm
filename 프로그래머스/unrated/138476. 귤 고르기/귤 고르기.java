@@ -15,20 +15,11 @@ class Solution {
         }
         Collections.sort(list, Collections.reverseOrder());
         
-        // System.out.println(hmap.toString());
-        // System.out.println(list.toString());
-        
         int sum=0;
-        for(int i=0; i<list.size(); i++){
-            sum+=list.get(i);
-            if(sum==k) {
-                // System.out.println("Same: "+sum+" I: "+i);
-                return i+1;
-            }
-            else if(sum>k) {
-                // System.out.println("Less: "+sum+" I: "+i);
-                return i+1;
-            }
+        for(Integer num : list) {
+            sum+=num;
+            if(sum>=k) return answer+1;
+            answer++;
         }
         
         
