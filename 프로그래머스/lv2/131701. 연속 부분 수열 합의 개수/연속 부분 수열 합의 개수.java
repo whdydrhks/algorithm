@@ -1,15 +1,17 @@
 import java.util.*;
-
 class Solution {
         public int solution(int[] elements) {
-            Set<Integer> set = new HashSet<>();
-            int[] dp = new int[elements.length];
-            for(int len = 1;len <= elements.length; len++){
-                for(int i = 0;i<elements.length;i++){
-                    dp[i] += elements[(len+i-1)%elements.length];
-                    set.add(dp[i]);
+            HashSet<Integer> hset = new HashSet<>();
+            for(int len=1; len<=elements.length; len++){
+                int sum=0;
+                // System.out.println("Len: "+len);
+                for(int i=0; i<elements.length; i++){
+                    sum+=elements[(len+i-1)%elements.length]; // 길이+원소위치-(위치재자리
+                    hset.add(sum);    
+                    // System.out.println("Sum: "+sum);
                 }
+                // System.out.println();
             }
-            return set.size();
+            return hset.size();
         }
     }
