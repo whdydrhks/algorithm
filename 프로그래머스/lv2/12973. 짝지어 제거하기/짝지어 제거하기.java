@@ -8,11 +8,9 @@ class Solution
             char ch = s.charAt(i);
             if(stack.isEmpty()) { 
                 stack.push(ch);
-                continue;
             }
-            if(stack.peek()==ch) {
+            else if(stack.peek()==ch) {
                 stack.pop();
-                continue;
             }
             else stack.push(ch);
         }
