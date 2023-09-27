@@ -1,21 +1,15 @@
 import java.util.*;
+
 class Solution {
     public int solution(int[] citations) {
-        int answer = 0;
         Arrays.sort(citations);
-        int len = citations.length;
-        int num=1;
-        while(true) {
-            if(num>len) break;
-            int sum=0;
-            for(int citation : citations) {
-                if(citation>=num) sum++;
-            }
-            if(sum>=num && (len-sum)<=num) {
-                answer = Math.max(answer, num);
-            }
-            num++;
+
+        int max = 0;
+        for(int i = citations.length-1; i > -1; i--){
+            int min = (int)Math.min(citations[i], citations.length - i);
+            if(max < min) max = min;
         }
-        return answer;
+
+        return max;
     }
 }
