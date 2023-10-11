@@ -3,7 +3,6 @@ class Solution {
     public String solution(String[] cards1, String[] cards2, String[] goal) {
         String answer = "";
         for(String str : goal) answer+=str;
-        System.out.println("답: "+answer);
         flag = false;
         recur("", cards1, cards2, 0, cards1.length, 0, cards2.length, answer);
         return flag==true ? "Yes" : "No";
@@ -12,7 +11,6 @@ class Solution {
     public static void recur(String tmp, String[] cards1, String[] cards2, int depth1, int limit1, int depth2, int limit2, String answer) {
         if(flag || tmp.equals(answer)) {
             flag=true;
-            // System.out.println("Tmp: "+tmp);
             return;
         }
                 
