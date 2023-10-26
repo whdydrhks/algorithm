@@ -1,35 +1,41 @@
 import java.util.*;
+
 class Solution {
     public int[] solution(String[] keymap, String[] targets) {
         int[] answer = new int[targets.length];
-        
-        HashMap<Character, Integer> hmap = new HashMap<>();
-        for(String key : keymap) {
-            for(int i=0; i<key.length(); i++){               
-                if(!hmap.containsKey(key.charAt(i))) {
-                    hmap.put(key.charAt(i), i+1);
+        HashMap<Character,Integer> map = new HashMap<>();
+
+        for (String key : keymap) {
+            for (int j = 0; j < key.length(); j++) {
+
+                char ch = key.charAt(j);
+
+                if (map.containsKey(ch)){
+                    if(map.get(ch)>j){
+                        map.replace(ch,j+1);
+                    }
+                }else{
+                    map.put(ch,j+1);
                 }
-                else if((i+1) < hmap.get(key.charAt(i))) hmap.put(key.charAt(i),i+1);
             }
         }
-        
-        int answerIdx=-1;
-        for(String target : targets) {
-            answerIdx++;
-            int sum=0;
-            boolean flag=false;
-            for(int i=0; i<target.length(); i++){
-                if(!hmap.containsKey(target.charAt(i))) {
-                    answer[answerIdx]=-1;
-                    flag=true;
-					break;
+
+        for(int i=0; i< targets.length;i++){
+            int sum = 0;
+            for(int j=0; j<targets[i].length();j++){
+
+                char ch = targets[i].charAt(j);
+
+                if(map.containsKey(ch)){
+                    sum+=map.get(ch);
+                }else{
+                    sum = -1;
+                    break;
                 }
-                sum+=hmap.get(target.charAt(i));
             }
-            if(flag) continue;
-            else answer[answerIdx] =  sum;
+            answer[i] = sum;
         }
-        
+
         return answer;
     }
 }
